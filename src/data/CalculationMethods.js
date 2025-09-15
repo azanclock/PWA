@@ -18,7 +18,9 @@ export const CalculationMethods = {
     Tunusian: { name: 'Tunisian Ministry of Religous Affairs', params: { fajr: 18, isha: 18 }, methodOffsets: {} },
     TurkiyeDiyanet: { name: 'Türkiye Diyanet İşleri Baskanlığı', params: { fajr: 18, isha: 17 }, methodOffsets: { sunrise: -7, fajr: -1, dhuhr: 5, asr: 5, maghrib: 8, isha: 1 } },
     Diyanet15Degrees: { name: 'Turkish Diyanet Offsets with 15° Angles', params: { fajr: 15, isha: 15 }, methodOffsets: { imsak: -1, sunrise: -9, dhuhr: 5, asr: 5, maghrib: 7, isha: -1 } },
-    Tehran: { name: 'University of Tehran', params: { fajr: 17.7, isha: 14, maghrib: 5.5, midnight: 'Jafari' }, methodOffsets: {} }
+    Tehran: { name: 'University of Tehran', params: { fajr: 17.7, isha: 14, maghrib: 5.5, midnight: 'Jafari' }, methodOffsets: {} },
+    Jordan: { name: 'Ministry of Awqaf, Islamic Affairs and Holy Places, Jordan', params: { fajr: 18, isha: 18 }, methodOffsets: {maghrib: 5} }
+
 }
 
 export const AsrCalculationMethods = [
@@ -28,3 +30,4 @@ export const AsrCalculationMethods = [
 
 export const DuhaDefaultOffset = 15;
 export const DuhaendDefaultOffset = -10;
+

@@ -1,0 +1,123 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: black;
+}
+
+#clockCanvas {
+  max-height: 91vh;
+  max-width: 91vw;
+  cursor: pointer;
+}
+
+.offcanvas-body {
+  padding-top: 0;
+}
+
+#topMenu .nav-link {
+  color: whitesmoke;
+  opacity: 0.25;
+}
+
+#topMenu .nav-link.active {
+  background-color: #212529 !important;
+  opacity: 1;
+}
+
+#topMenu .nav-link:hover {
+  color: whitesmoke;
+}
+
+.subMenu .nav-link {
+  color: silver;
+}
+
+.subMenu .nav-link.active {
+  color: whitesmoke;
+}
+
+
+.bg-setting {
+  background-color: #1B1E21;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.whiteLink {
+  color: white;
+}
+
+.whiteLink:hover {
+  color: khaki;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.audioButtonDiv {
+  visibility: hidden;
+  position: fixed;
+  background-color: black;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0.41;
+  z-index: 2040;
+}
+
+#loadingDiv {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+  opacity: 0.7;
+  z-index: 2080;
+}
+
+
+.alarm-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: red;
+}
+
+
+.gray-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: gray;
+}
+
+
+.nafl-alarm-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: yellowgreen;
+}
+
+.rtl {
+  direction: rtl;
+  font-size: 14px;
+}
+
+#silkSettingDiv {
+  position: absolute;
+  bottom:33px;
+  right:33px;
+}

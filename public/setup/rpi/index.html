@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>AdhanClock - Privacy Policy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="d-flex h-100 justify-content-center align-items-center">
+        <div class="col-lg-6 col-sm-9 p-5">
+
+
+            AdhanClock.com
+            <h1>Raspberry Pi Setup Instructions</h1>
+
+            Instructions to set up a Raspberry Pi Smart Adhan Clock with wired speakers in kiosk
+            mode without attaching a monitor, keyboard or mouse ("headless setup").
+
+            <br /><br />
+
+            <ol>
+
+                <li><b>Required Hardware</b></li>
+                <ul>
+                    <li>Raspberry Pi Kit</li>
+                    <li>Speakers</li>
+                </ul>
+
+                <hr />
+
+                <li><b>Download Software & Tools</b></li>
+                <ul>
+                    <li><a target="_blank" href="https://www.raspberrypi.org/downloads/raspberry-pi-os/">Download
+                            Raspberry Pi OS (32-bit with desktop) <i class="glyphicon glyphicon-new-window"></i></a>
+                    </li>
+                    <li><a target="_blank" href="https://etcher.io">Download Etcher <i
+                                class="glyphicon glyphicon-new-window"></i></a></li>
+                    <li><a target="_blank" href="https://www.putty.org">Download PuTTY <i
+                                class="glyphicon glyphicon-new-window"></i></a></li>
+                    <li><a target="_blank" href="https://www.realvnc.com/en/connect/download/viewer/windows/">Download
+                            Real VNC Viewer</a> (optional)</li>
+                </ul>
+                <hr />
+
+                <li><b>Burn Raspberry Pi OS to SD Card using Etcher</b></li>
+                After Etcher writes & verifies the card it'll eject it. Remove the card reader from your computer and
+                insert it back in.
+                If your computer asks to format the card again click on Cancel/No. You'll now see a new drive on your
+                computer named "Boot".
+
+                <hr />
+
+                <li><b>Connect to your WiFi</b></li>
+                Add a new file named <b>"wpa_supplicant.conf"</b> to the root folder of Boot Drive with the following
+                content. (Use your WiFi credentials for ssid and psk.)
+                <br /><br />
+                <pre><code>ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=US
+network={
+    ssid="YOUR_WIFI_NETWORK_NAME"
+    psk="YOUR_WIFI_PASSWORD"
+    key_mgmt=WPA-PSK
+}</code></pre>
+
+                <hr />
+
+                <li><b>Enable SSH</b></li>
+                Add an empty file named <b>"ssh"</b> to the root folder of Boot Drive.
+
+                <hr />
+
+                <li><b>Insert SD Card into RPi & power it on. </b></li>
+
+                <hr />
+
+                <li><b>Connect using PuTTY</b></li>
+                Try <b>raspberrypi</b> or <b>raspberrypi.local</b> as the host name. If these don't work you'll have to
+                find out RPi's IP address from your router manager.
+                <hr />
+
+                <li><b>Change default password</b></li>
+                RPi's default username: <b>pi</b><br />
+                password: <b>raspberry</b><br />
+                Run passwd command and follow the instructions.
+
+                <hr />
+
+                <li><b>Update all Raspberry Pi OS Packages to latest</b></li>
+                <pre><code>sudo apt-get update
+sudo apt-get upgrade
+sudo reboot</code></pre>
+
+                <hr />
+
+                <li><b>Update Chromium Browser to latest</b></li>
+                <pre><code>sudo apt-get install chromium-browser</code></pre>
+
+                <hr />
+
+                <li><b>Set up kiosk mode on initial start up</b></li>
+
+                <pre><code>cd ~/.config
+sudo mkdir -p lxsession/LXDE-pi
+cd lxsession/LXDE-pi
+sudo nano autostart
+</code></pre>
+
+                Copy & paste the following content to autostart file<br /><br />
+                <pre><code>@@lxpanel --profile LXDE-pi
+@@pcmanfm --desktop --profile LXDE-pi
+#@@xscreensaver -no-splash
+@@point-rpi
+@@xset s off
+@@xset s noblank
+@@xset -dpms
+@@chromium-browser --noerrdialogs --disable-session-crashed-bubble --disable-infobars --kiosk https://adhanclock.com/
+</code></pre>
+
+                <hr />
+
+                <li><b>Enable VNC and remote desktop to RPi (optional)</b></li>
+                <pre><code>sudo raspi-config</code></pre>
+                Select "Interfacing Options". Enable VNC and Finish.
+                <p></p>
+                You can connect to your RPi using RealVNC and see Adhan Clock in action.
+                You can add a bluetooth speaker, adjust device volume and change app settings directly on the device.
+                <hr />
+
+                <li><b>Reboot</b></li>
+                <pre><code>sudo reboot</code></pre>
+
+
+            </ol>
+
+            <p></p>
+
+
+            For any questions or suggestions please contact us at <a
+                href="mailto:adhanclock@gmail.com">adhanclock@gmail.com</a>.
+            <p></p>
+
+            <a class="btn btn-primary col-12" href="/">Back to AdhanClock.com</a>
+
+
+
+        </div>
+    </div>
+
+</body>
+
+</html>

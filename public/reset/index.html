@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>AdhanClock - Reset</title>
+    <style>
+        body {
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <script lang="JavaScript">
+
+        localStorage.clear();
+
+        caches.keys().then((names) => {
+            for (let name of names) {
+                caches.delete(name);
+            }
+        });
+
+
+        /* we don't use cookies anymore; remove any remaining from old versions */
+        var allCookies = document.cookie.split(';');
+        for (let i = 0; i < allCookies.length; i++) {
+            document.cookie = allCookies[i] + "=;expires=" + new Date(0).toUTCString();
+        }
+
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker
+                .register("../service-worker.js")
+                .then((registration) => {
+                    registration.unregister();
+                })
+                .catch((error) => {
+                    console.error(`Registration failed with ${error}`);
+                })
+                .finally(() => { top.location.href = '/' });
+        }
+
+    </script>
+</body>
+
+</html>

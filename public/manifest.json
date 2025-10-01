@@ -1,8 +1,8 @@
 {
   "id": "/",
-  "short_name": "AdhanClock",
-  "name": "Adhan Clock",
-  "description": "Online Adhan Clock - Muslim Prayer Times",
+  "short_name": "AzanClock",
+  "name": "Azan Clock",
+  "description": "Online Azan Clock - Muslim Prayer Times",
   "icons": [
     {
       "src": "/icon48.png",

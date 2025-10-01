@@ -35,7 +35,7 @@ export default function Settings() {
             <div key={item} className="mt-2">
 
                 <div className='d-flex flex-row justify-content-between'>
-                    <div><span className='badge p-0'>{item} Adhan @ {vTime}</span></div>
+                    <div><span className='badge p-0'>{item} Azan @ {vTime}</span></div>
                     <div className='col-4'><span className='badge'>Minute Offset</span></div>
                 </div>
 

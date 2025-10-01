@@ -33,7 +33,7 @@ export default function AudioPlayer() {
                     if (promise) {
                         promise.then(_ => {
                             // autoplay started!
-                            dol('Adhan called: ' + locationSettings.address);
+                            dol('Azan called: ' + locationSettings.address);
                             playerDiv.current.style.visibility = 'visible';
                             playButtonDiv.current.style.visibility = 'hidden';
                         }).catch(error => {

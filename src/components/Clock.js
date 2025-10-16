@@ -38,7 +38,7 @@ export default function Clock() {
             .print(ctx, displayTime, 250, white, -27)
             .print(ctx, 'Elapsed ' + elapsed + ' · ' + nextVakit.name + ' in', 31, white, 109)
             .print(ctx, nextText, 156, white, 223)
-            .updateTitle(ctx, 'AzanClock • ' + currentVakit.name + ' • [Next: ' + nextVakit.name + ' @ ' + nextVakit.time + ' in ' + nextText + '] ' + locationSettings.address)
+            .updateTitle(ctx, 'AzanClock • ' + currentVakit.name + ' • Next: ' + nextVakit.name + ' @ ' + nextVakit.time + ' in ' + nextText + ' • ' + locationSettings.address)
             .arcText(ctx, 'top', todaysDate, 45, 337, white)
             .arcText(ctx, 'top', hijriDate, 39, 265, white)
             .arcText(ctx, 'bottom', '#vakits#', 31, 377, white)

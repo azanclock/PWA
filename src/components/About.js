@@ -2,6 +2,7 @@ import React from 'react'
 import { FontAwesome } from '../data/FontAwesome';
 import lenovoM8Image from '../images/lenovo-m8-tab.jpg'
 import lenovoM10Image from '../images/lenovo-m10-tab.jpg'
+import zakatTrackerLogo from '../images/zakat-tracker-logo.png'
 
 export default function About() {
 
@@ -81,6 +82,16 @@ export default function About() {
             }
 
             <p></p>
+
+            <a className='d-flex align-items-center gap-3 text-decoration-none rounded p-2 mt-2'
+                href="https://zakattracker.com/?ac" target="_blank" rel="noreferrer"
+                style={{ backgroundColor: 'white' }}>
+                <img src={zakatTrackerLogo} alt="Zakat Tracker" width="44" height="44" className="rounded" />
+                <div>
+                    <div className='fw-bold text-dark'>ZakatTracker.com</div>
+                    <div className='text-muted small'>Calculate and Track Your Zakat Easily</div>
+                </div>
+            </a>
 
             <div className='d-flex flex-row justify-content-between gap-1 align-items-center mt-4'>
                 <div>

@@ -121,3 +121,26 @@ body {
   bottom:33px;
   right:33px;
 }
+
+/* Slim scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #444 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #666;
+}

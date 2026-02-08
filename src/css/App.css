@@ -6,6 +6,30 @@ body,
 
 body {
   background-color: black;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: inherit;
+  filter: blur(3px) brightness(0.5);
+  z-index: -1;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.7) 100%);
+  z-index: -1;
 }
 
 #clockCanvas {

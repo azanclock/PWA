@@ -24,5 +24,5 @@ Use [AzanClock.com](https://azanclock.com) to display accurate prayer times and 
 
 ## <img src="public/zakattracker-logo.svg" alt="ZakatTracker Logo" width="24" height="24"> ZakatTracker.com
 
-Check out our new project **[ZakatTracker.com](https://zakattracker.com)** — a simple tool to [calculate zakat](https://zakattracker.com) and [track your zakat](https://zakattracker.com) easily. Stay on top of your obligations with an accurate [zakat calculator](https://zakattracker.com) and a clean, intuitive interface.
+Check out our new project **[ZakatTracker.com](https://zakattracker.com)** — a simple tool to [calculate zakat](https://zakattracker.com) and [track your zakat](https://zakattracker.com) easily. Calculate [zakat on gold](https://zakattracker.com), [zakat on 401k](https://zakattracker.com), [zakat on IRA](https://zakattracker.com), and [zakat on Roth IRA](https://zakattracker.com). Stay on top of your obligations with an accurate [zakat calculator](https://zakattracker.com) and a clean, intuitive interface.
 

@@ -22,7 +22,7 @@ Use [AzanClock.com](https://azanclock.com) to display accurate prayer times and 
 3. Configure your location & prayer time settings.
 4. Enjoy an accurate, beautiful Azan Clock — anywhere.
 
-## 🌙 ZakatTracker.com
+## <img src="public/zakattracker-logo.svg" alt="ZakatTracker Logo" width="24" height="24"> ZakatTracker.com
 
 Check out our new project **[ZakatTracker.com](https://zakattracker.com)** — a simple tool to [calculate zakat](https://zakattracker.com) and [track your zakat](https://zakattracker.com) easily. Stay on top of your obligations with an accurate [zakat calculator](https://zakattracker.com) and a clean, intuitive interface.
 

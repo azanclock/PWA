@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Blue border segments - 18.18px thickness -->
+  <rect x="0" y="0" width="18.18" height="200" fill="#2563EB"/>
+  <rect x="0" y="181.82" width="200" height="18.18" fill="#2563EB"/>
+  <rect x="181.82" y="18.18" width="18.18" height="181.82" fill="#2563EB"/>
+  <rect x="0" y="0" width="181.82" height="18.18" fill="#2563EB"/>
+
+  <!-- Green square: 18.18x18.18 at top-right corner (1/40 of border area) -->
+  <rect x="181.82" y="0" width="18.18" height="18.18" fill="#22C55E"/>
+
+  <!-- Green checkmark in center -->
+  <path d="M 60 100 L 85 125 L 140 70" fill="none" stroke="#22C55E" stroke-width="12" stroke-linecap="butt" stroke-linejoin="miter"/>
+</svg>

@@ -21,7 +21,7 @@ export default function Clock() {
         updateBackground(background);
 
         sac.clearCanvas(ctx)
-            .fillCircle(ctx, 500, 0, 0, white, 0.33)
+            .fillCircle(ctx, 490, 0, 0, white, 0.33)
             .fillCircle(ctx, 488, 0, 0, black)
             .drawNumbers24(ctx, 455, 13, white)
             .drawArcs(ctx, 421, 41)

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { AppContext } from '../AppContext';
 import { format12 } from '../scripts/SmartAzanClock'
 
@@ -8,7 +8,7 @@ export default function Clock() {
         calculationSettings, deviceSettings, hourAngle, vakits, arcVakits, displayTime, currentVakit, nextVakit, currentArcVakit,
         elapsed, background, dim, clockOpacity, midnightAngle, oneThirdAngle, twoThirdAngle, alarmSettings, naflAlarmSettings, isWeekDay } = useContext(AppContext)
     const canvasRef = useRef(null)
-    const [drift, setDrift] = useState({ x: 0, y: 0 })
+    const driftRef = useRef(null)
     const size = 1000; /* size = width = height */
     const black = '#0D0E0F';
     const gray = '#4B4E54';
@@ -16,8 +16,11 @@ export default function Clock() {
     const silver = 'silver';
 
     useEffect(() => {
+        const el = driftRef.current
+        if (!el) return
         if (deviceSettings.screenSaver !== 'Y') {
-            setDrift({ x: 0, y: 0 })
+            el.style.transform = 'translate(0px, 0px)'
+            document.body.style.backgroundPosition = '50% 50%'
             return
         }
         const speed = 0.3 // pixels per frame
@@ -37,7 +40,9 @@ export default function Clock() {
             if (y >= maxY || y <= -maxY) dy = -dy
             x = Math.max(-maxX, Math.min(maxX, x))
             y = Math.max(-maxY, Math.min(maxY, y))
-            setDrift({ x, y })
+            el.style.transform = `translate(${x}px, ${y}px)`
+            if (background.length > 0)
+                document.body.style.backgroundPosition = `${50 + x * 0.15}% ${50 + y * 0.15}%`
         }, 50)
         return () => clearInterval(interval)
     }, [deviceSettings.screenSaver, deviceSettings.zoomedIn])
@@ -338,7 +343,6 @@ export default function Clock() {
             document.body.style.backgroundImage = 'url(' + bg + ')';
             document.body.style.backgroundSize = '110% 110%';
             document.body.style.backgroundRepeat = 'no-repeat';
-            document.body.style.backgroundPosition = `${50 + drift.x * 0.15}% ${50 + drift.y * 0.15}%`;
         }
         else {
             document.body.style.backgroundImage = null;
@@ -351,8 +355,7 @@ export default function Clock() {
     return (
         <div className='d-flex flex-row h-100 align-items-center justify-content-center'
             style={{ overflow: 'hidden' }}>
-            <div onClick={() => setShowMenu(!showMenu)}
-                style={{ transform: `translate(${drift.x}px, ${drift.y}px)` }}>
+            <div ref={driftRef} onClick={() => setShowMenu(!showMenu)}>
                 <canvas id="clockCanvas" className="img-fluid"
                     style={{ opacity: clockOpacity, transform: deviceSettings.zoomedIn === 'Y' ? 'scale(2.2) translateY(-3%)' : 'none' }}
                     width={size} height={size} ref={canvasRef} ></canvas>

@@ -84,6 +84,16 @@ export default function Settings() {
             </div>
 
             <div className="mt-2">
+                <span className='badge mb-1 p-0'>Screen Saver Mode</span>
+                <Options name="deviceSettings.screenSaver" selectedValue={deviceSettings.screenSaver} values={AzanCallOptions} />
+            </div>
+
+            <div className="mt-2">
+                <span className='badge mb-1 p-0'>Zoomed In Mode</span>
+                <Options name="deviceSettings.zoomedIn" selectedValue={deviceSettings.zoomedIn} values={AzanCallOptions} />
+            </div>
+
+            <div className="mt-2">
                 <span className='badge mb-1 p-0'>Enable Azan Calls & Alarms</span>
                 <Options name="deviceSettings.azanCallsEnabled" selectedValue={deviceSettings.azanCallsEnabled} values={AzanCallOptions} />
             </div>

@@ -37,13 +37,16 @@ export default function Clock() {
     const handlePointerUp = () => {
         const drag = dragRef.current
         drag.isDragging = false
-        if (!drag.hasMoved) {
-            setShowMenu(!showMenu)
-        }
         drag.offsetX = 0
         drag.offsetY = 0
         const el = dragWrapperRef.current
         if (el) el.style.transform = 'translate(0px, 0px)'
+    }
+
+    const handleClick = () => {
+        if (!dragRef.current.hasMoved) {
+            setShowMenu(!showMenu)
+        }
     }
     const size = 1000; /* size = width = height */
     const black = '#0D0E0F';
@@ -396,6 +399,7 @@ export default function Clock() {
                     onPointerDown={handlePointerDown}
                     onPointerMove={handlePointerMove}
                     onPointerUp={handlePointerUp}
+                    onClick={handleClick}
                     style={{ touchAction: 'none', cursor: 'grab' }}>
                     <canvas id="clockCanvas" className="img-fluid"
                         style={{ opacity: clockOpacity, transform: deviceSettings.zoomedIn === 'Y' ? 'scale(2.2) translateY(-3%)' : 'none' }}

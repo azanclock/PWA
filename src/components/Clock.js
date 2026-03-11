@@ -9,6 +9,42 @@ export default function Clock() {
         elapsed, background, dim, clockOpacity, midnightAngle, oneThirdAngle, twoThirdAngle, alarmSettings, naflAlarmSettings, isWeekDay } = useContext(AppContext)
     const canvasRef = useRef(null)
     const driftRef = useRef(null)
+    const dragWrapperRef = useRef(null)
+    const dragRef = useRef({ isDragging: false, startX: 0, startY: 0, offsetX: 0, offsetY: 0, hasMoved: false })
+
+    const handlePointerDown = (e) => {
+        const drag = dragRef.current
+        drag.isDragging = true
+        drag.startX = e.clientX - drag.offsetX
+        drag.startY = e.clientY - drag.offsetY
+        drag.hasMoved = false
+        e.currentTarget.setPointerCapture(e.pointerId)
+    }
+
+    const handlePointerMove = (e) => {
+        const drag = dragRef.current
+        if (!drag.isDragging) return
+        const newX = e.clientX - drag.startX
+        const newY = e.clientY - drag.startY
+        if (Math.abs(newX - drag.offsetX) > 3 || Math.abs(newY - drag.offsetY) > 3)
+            drag.hasMoved = true
+        drag.offsetX = newX
+        drag.offsetY = newY
+        const el = dragWrapperRef.current
+        if (el) el.style.transform = `translate(${newX}px, ${newY}px)`
+    }
+
+    const handlePointerUp = () => {
+        const drag = dragRef.current
+        drag.isDragging = false
+        if (!drag.hasMoved) {
+            setShowMenu(!showMenu)
+        }
+        drag.offsetX = 0
+        drag.offsetY = 0
+        const el = dragWrapperRef.current
+        if (el) el.style.transform = 'translate(0px, 0px)'
+    }
     const size = 1000; /* size = width = height */
     const black = '#0D0E0F';
     const gray = '#4B4E54';
@@ -355,10 +391,16 @@ export default function Clock() {
     return (
         <div className='d-flex flex-row h-100 align-items-center justify-content-center'
             style={{ overflow: 'hidden' }}>
-            <div ref={driftRef} onClick={() => setShowMenu(!showMenu)}>
-                <canvas id="clockCanvas" className="img-fluid"
-                    style={{ opacity: clockOpacity, transform: deviceSettings.zoomedIn === 'Y' ? 'scale(2.2) translateY(-3%)' : 'none' }}
-                    width={size} height={size} ref={canvasRef} ></canvas>
+            <div ref={driftRef}>
+                <div ref={dragWrapperRef}
+                    onPointerDown={handlePointerDown}
+                    onPointerMove={handlePointerMove}
+                    onPointerUp={handlePointerUp}
+                    style={{ touchAction: 'none', cursor: 'grab' }}>
+                    <canvas id="clockCanvas" className="img-fluid"
+                        style={{ opacity: clockOpacity, transform: deviceSettings.zoomedIn === 'Y' ? 'scale(2.2) translateY(-3%)' : 'none' }}
+                        width={size} height={size} ref={canvasRef} ></canvas>
+                </div>
             </div>
         </div >
     );

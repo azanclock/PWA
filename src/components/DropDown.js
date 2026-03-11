@@ -18,6 +18,8 @@ export default function DropDown(props) {
 
     return (
         <select onChange={updateValue} name={props.name} id={props.name} value={props.selectedValue}
+            disabled={props.disabled}
+            style={props.disabled ? { opacity: 0.5 } : {}}
             className='form-control form-control-sm'>
             {props.values.map(o => (
                 <option value={o.id} key={o.id}>{o.name}</option>

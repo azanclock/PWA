@@ -20,6 +20,8 @@ export default function Settings() {
         CalculationMethodValues.push({ id: k, name: CalculationMethods[k].name });
     })
 
+    const isRamadan = new Intl.DateTimeFormat('en-u-ca-islamic', { month: 'numeric' }).format(new Date()) === '9';
+    const azanEnabled = deviceSettings.azanCallsEnabled === 'Y';
     const azanSettingsHTML = [];
     const Vakits = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
     Vakits.map((item) => {
@@ -42,11 +44,12 @@ export default function Settings() {
                 <div className='d-flex flex-row gap-1'>
 
                     <div className='col-6'>
-                        <DropDown name={'azanSettings.' + cVakit} selectedValue={azanValue} values={values} />
+                        <DropDown name={'azanSettings.' + cVakit} selectedValue={azanValue} values={values} disabled={!azanEnabled} />
                     </div>
                     <div className='col-2'>
                         <button onClick={() => { previewAudio(azanValue * 1); document.activeElement.blur(); }}
                             type='button'
+                            disabled={!azanEnabled}
                             className='btn btn-sm btn-primary col-12'>{FontAwesome.Play}</button>
                     </div>
                     <div>
@@ -65,6 +68,10 @@ export default function Settings() {
 
     return (
         <div>
+
+            {isRamadan && <div className='alert alert-warning p-2 mb-2' style={{ fontSize: '0.85rem' }}>
+                🌙 <strong>Ramadan Tip:</strong> Many people add a few extra minutes to the Maghrib offset during Ramadan to ensure sunset has fully occurred. May Allah accept all our fasting. 🤲
+            </div>}
 
             <Address value={locationSettings.address} />
 
@@ -98,7 +105,7 @@ export default function Settings() {
                 <Options name="deviceSettings.azanCallsEnabled" selectedValue={deviceSettings.azanCallsEnabled} values={AzanCallOptions} />
             </div>
 
-            {(deviceSettings.azanCallsEnabled === 'Y') && azanSettingsHTML}
+            {azanSettingsHTML}
 
             <div className='d-flex flex-row justify-content-start gap-2 mt-3'>
                 <div className='badge bg-secondary p-1'>Imsak @ {format12(arcVakits.find(f => f.name == 'Imsak').time)}</div>

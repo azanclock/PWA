@@ -97,6 +97,21 @@ body::after {
   z-index: 2040;
 }
 
+.audioPlayerFixed {
+  visibility: hidden;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 2050;
+  padding: 16px;
+}
+
+.audioPlayerBtn {
+  font-size: 1.25rem;
+  padding: 12px 32px;
+  min-width: 120px;
+}
+
 #loadingDiv {
   position: fixed;
   top: 0;

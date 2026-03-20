@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from 'react'
+import React, { useContext, useRef, useEffect, useState } from 'react'
 import { AppContext } from '../AppContext';
 import { Audios, QuranAudios } from '../data/Audios';
 import { FontAwesome } from '../data/FontAwesome';
@@ -7,11 +7,10 @@ export default function AudioPlayer() {
 
     const { time, locationSettings, dol, setIsAudioPlaying } = useContext(AppContext)
     const playerDiv = useRef(null)
-    const audioTitle = useRef(null)
     const playButtonDiv = useRef(null)
     const audioPlayer = useRef(null)
-    const pauseButton = useRef(null)
     const endButton = useRef(null)
+    const [isPaused, setIsPaused] = useState(false)
 
     useEffect(() => {
 
@@ -28,7 +27,7 @@ export default function AudioPlayer() {
                     localStorage.setItem("AAA", JSON.stringify({ ...AU }));
                     let audio = Audios.find(a => a.id === AU.id);
                     audioPlayer.current.src = audio.source;
-                    audioTitle.current.innerHTML = audio.name;
+
                     let promise = audioPlayer.current.play();
                     if (promise) {
                         promise.then(_ => {
@@ -40,16 +39,14 @@ export default function AudioPlayer() {
                             dol(error);
                             playerDiv.current.style.visibility = 'hidden';
                             playButtonDiv.current.style.visibility = 'visible';
-                            audioTitle.current.innerHTML = '';
-                        });
+                                                    });
                     }
                 }
             }
             else {
                 localStorage.removeItem("AAA");
                 playButtonDiv.current.style.visibility = 'hidden';
-                audioTitle.current.innerHTML = '';
-            }
+                            }
 
         }
 
@@ -59,7 +56,7 @@ export default function AudioPlayer() {
             localStorage.removeItem("QuranAudio");
             let audio = QuranAudios.find(a => a.id === QA.id);
             audioPlayer.current.src = audio.mp3;
-            audioTitle.current.innerHTML = 'Surah ' + audio.name;
+
             let promise = audioPlayer.current.play();
             if (promise) {
                 promise.then(_ => {
@@ -70,8 +67,7 @@ export default function AudioPlayer() {
                     dol(error);
                     playerDiv.current.style.visibility = 'hidden';
                     playButtonDiv.current.style.visibility = 'visible';
-                    audioTitle.current.innerHTML = '';
-                });
+                                    });
             }
         }
 
@@ -83,9 +79,8 @@ export default function AudioPlayer() {
         audioPlayer.current.currentTime = 0;
         playerDiv.current.style.visibility = 'hidden';
         playButtonDiv.current.style.visibility = 'hidden';
-        endButton.current.style.visibility = 'hidden';
-        audioTitle.current.innerHTML = '';
-    }
+        endButton.current.style.display = 'none';
+            }
 
     const togglePause = () => {
         if (audioPlayer.current.paused)
@@ -95,15 +90,16 @@ export default function AudioPlayer() {
     }
 
     const audioPaused = () => {
+        if (audioPlayer.current.ended) return;
         setIsAudioPlaying(false);
-        pauseButton.current.innerHTML = 'Continue';
-        endButton.current.style.visibility = 'visible';
+        setIsPaused(true);
+        endButton.current.style.display = 'block';
     }
 
     const audioPlayed = () => {
         setIsAudioPlaying(true)
-        pauseButton.current.innerHTML = 'Pause';
-        endButton.current.style.visibility = 'hidden';
+        setIsPaused(false);
+        endButton.current.style.display = 'none';
     }
 
     const playAudio = () => {
@@ -114,16 +110,11 @@ export default function AudioPlayer() {
 
     return (
         <>
-            <div ref={playerDiv} className="audioButtonDiv">
-                <div className='d-flex flex-row justify-content-start p-3'>
-                    <div className='d-flex flex-column align-items-center gap-3'>
-                        <div className="text-light text-center" ref={audioTitle}></div>
-                        <div>
-                            <audio controls id="audioPlayer" src='' ref={audioPlayer} onPlay={audioPlayed} onPause={audioPaused} onEnded={stopAudio} />
-                        </div>
-                        <div><button ref={pauseButton} className='btn btn-lg btn-light px-5' onClick={togglePause}></button></div>
-                        <div><button ref={endButton} className='btn btn-lg btn-danger px-5' onClick={stopAudio}>End</button></div>
-                    </div>
+            <audio id="audioPlayer" src='' ref={audioPlayer} onPlay={audioPlayed} onPause={audioPaused} onEnded={stopAudio} style={{ display: 'none' }} />
+            <div ref={playerDiv} className="audioPlayerFixed">
+                <div className='d-flex flex-row gap-3'>
+                    <button className='btn btn-light audioPlayerBtn' onClick={togglePause}>{isPaused ? FontAwesome.Play : FontAwesome.Pause}</button>
+                    <button ref={endButton} className='btn btn-danger audioPlayerBtn' onClick={stopAudio}>{FontAwesome.Stop}</button>
                 </div>
             </div>
             <div ref={playButtonDiv} onClick={playAudio} className="audioButtonDiv">

@@ -38,7 +38,7 @@
   "start_url": "./",
   "scope": "/",
   "display": "fullscreen",
-  "theme_color": "#212529",
+  "theme_color": "#000000",
   "orientation": "any",
   "background_color": "black"
 }

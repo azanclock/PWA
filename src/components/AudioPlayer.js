@@ -11,6 +11,8 @@ export default function AudioPlayer() {
     const audioPlayer = useRef(null)
     const endButton = useRef(null)
     const [isPaused, setIsPaused] = useState(false)
+    const [currentTime, setCurrentTime] = useState(0)
+    const [duration, setDuration] = useState(0)
 
     useEffect(() => {
 
@@ -102,6 +104,26 @@ export default function AudioPlayer() {
         endButton.current.style.display = 'none';
     }
 
+    const formatTime = (seconds) => {
+        const m = Math.floor(seconds / 60);
+        const s = Math.floor(seconds % 60);
+        return `${m}:${s.toString().padStart(2, '0')}`;
+    }
+
+    const onTimeUpdate = () => {
+        setCurrentTime(audioPlayer.current.currentTime);
+    }
+
+    const onLoadedMetadata = () => {
+        setDuration(audioPlayer.current.duration);
+    }
+
+    const onSliderChange = (e) => {
+        const time = parseFloat(e.target.value);
+        audioPlayer.current.currentTime = time;
+        setCurrentTime(time);
+    }
+
     const playAudio = () => {
         audioPlayer.current.play();
         playerDiv.current.style.visibility = 'visible';
@@ -110,11 +132,15 @@ export default function AudioPlayer() {
 
     return (
         <>
-            <audio id="audioPlayer" src='' ref={audioPlayer} onPlay={audioPlayed} onPause={audioPaused} onEnded={stopAudio} style={{ display: 'none' }} />
+            <audio id="audioPlayer" src='' ref={audioPlayer} onPlay={audioPlayed} onPause={audioPaused} onEnded={stopAudio} onTimeUpdate={onTimeUpdate} onLoadedMetadata={onLoadedMetadata} style={{ display: 'none' }} />
             <div ref={playerDiv} className="audioPlayerFixed">
                 <div className='d-flex flex-row gap-3'>
                     <button className='btn btn-light audioPlayerBtn' onClick={togglePause}>{isPaused ? FontAwesome.Play : FontAwesome.Pause}</button>
-                    <button ref={endButton} className='btn btn-danger audioPlayerBtn' onClick={stopAudio}>{FontAwesome.Stop}</button>
+                    <button ref={endButton} className='btn btn-light audioPlayerBtn' onClick={stopAudio}>{FontAwesome.Stop}</button>
+                </div>
+                <div className='d-flex align-items-center gap-2 mt-2 w-100'>
+                    <input type='range' className='flex-grow-1' min={0} max={duration} step={0.1} value={currentTime} onChange={onSliderChange} />
+                    <span className='text-light' style={{fontSize: '0.85rem', whiteSpace: 'nowrap'}}>{formatTime(currentTime)} / {formatTime(duration)}</span>
                 </div>
             </div>
             <div ref={playButtonDiv} onClick={playAudio} className="audioButtonDiv">

@@ -12,7 +12,7 @@
   ],
   "start_url": "/",
   "scope": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "theme_color": "#000000",
   "orientation": "any",
   "background_color": "#000000"

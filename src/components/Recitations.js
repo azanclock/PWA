@@ -14,7 +14,7 @@ export default function Recitations() {
             {QuranAudios.map((q) => (<button key={'Q' + q.id} type='button'
                 className='btn btn-sm btn-primary my-2 col-12 text-start' onClick={() => {
                     reciteQuranAudio(q.id);
-                    showMsg('Recitation by ' + q.reciter + ' will begin in about 10 seconds inshaAllah.');
+                    showMsg('Recitation by ' + q.reciter + ' will begin in about 3 seconds inshaAllah.');
                     document.activeElement.blur();
                 }}>
                 <div title={q.reciter} className='d-flex flex-row justify-content-between p-1 gap-3'>

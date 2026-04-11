@@ -152,7 +152,7 @@ export default function AppContextProvider() {
         setTimeout(() => {
             localStorage.setItem("QuranAudio", JSON.stringify({ id: id }));
             setOutput(SmartAzanClock.run('Quran Recitation'))
-        }, 10 * 1000)
+        }, 3 * 1000)
         setShowMenu(false);
     }
 

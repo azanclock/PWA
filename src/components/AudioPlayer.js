@@ -124,6 +124,10 @@ export default function AudioPlayer() {
         setCurrentTime(time);
     }
 
+    const rewind5 = () => {
+        audioPlayer.current.currentTime = Math.max(0, audioPlayer.current.currentTime - 5);
+    }
+
     const playAudio = () => {
         audioPlayer.current.play();
         playerDiv.current.style.visibility = 'visible';
@@ -136,6 +140,7 @@ export default function AudioPlayer() {
             <div ref={playerDiv} className="audioPlayerFixed">
                 <div className='d-flex flex-row gap-3'>
                     <button className='btn btn-light audioPlayerBtn' onClick={togglePause}>{isPaused ? FontAwesome.Play : FontAwesome.Pause}</button>
+                    {isPaused && <button className='btn btn-light audioPlayerBtn' onClick={rewind5}>{FontAwesome.Backward} 5s</button>}
                     <button ref={endButton} className='btn btn-light audioPlayerBtn' onClick={stopAudio}>{FontAwesome.Stop}</button>
                 </div>
                 <div className='d-flex align-items-center gap-2 mt-2 w-100'>

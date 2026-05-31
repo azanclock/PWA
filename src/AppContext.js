@@ -156,8 +156,14 @@ export default function AppContextProvider() {
         setShowMenu(false);
     }
 
+    const refreshClock = () => {
+        setOutput(SmartAzanClock.run('manual refresh'));
+        requestWakeLock();
+        setShowMenu(false);
+    }
+
     return (
-        <AppContext.Provider value={{ showMenu, setShowMenu, showMsg, showPersistentToast, isAudioPlaying, setIsAudioPlaying, ...output, updateSettings, updateOffset, previewAudio, reciteQuranAudio, dol }}>
+        <AppContext.Provider value={{ showMenu, setShowMenu, showMsg, showPersistentToast, isAudioPlaying, setIsAudioPlaying, ...output, updateSettings, updateOffset, previewAudio, reciteQuranAudio, refreshClock, dol }}>
             {output ? <Clock /> : null}
             {showLoading ? <Loading /> : null}
             {output ? <Menu /> : null}

@@ -12,7 +12,7 @@ import { FontAwesome } from '../data/FontAwesome';
 
 export default function Menu() {
 
-    const { showMenu, setShowMenu, deviceSettings } = useContext(AppContext)
+    const { showMenu, setShowMenu, deviceSettings, refreshClock } = useContext(AppContext)
 
     const recitationsTab = useRef(null);
 
@@ -76,7 +76,7 @@ export default function Menu() {
                                 </div>) : null}
 
                                 {navigator.onLine ? (<div className='col-6'>
-                                    <a className='btn btn-sm col-12 btn-primary' href="/">Refresh</a>
+                                    <button className='btn btn-sm col-12 btn-primary' type='button' onClick={refreshClock}>Refresh</button>
                                 </div>) : null}
 
                                 {navigator.onLine ? (<div className='col-6'>

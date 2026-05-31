@@ -49,7 +49,10 @@ body::after {
 }
 
 #clockCanvas {
+  width: min(91vw, 91svh);
+  height: auto;
   max-height: 91vh;
+  max-height: 91svh;
   max-width: 91vw;
   cursor: pointer;
 }

@@ -5,12 +5,24 @@ html {
 html,
 body,
 #root {
+  width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 body {
   background-color: black;
   position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+#root {
+  position: fixed;
+  inset: 0;
 }
 
 body::before {

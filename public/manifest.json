@@ -12,6 +12,7 @@
   ],
   "start_url": "/",
   "scope": "/",
+  "display_override": ["fullscreen", "standalone"],
   "display": "fullscreen",
   "theme_color": "#000000",
   "orientation": "any",

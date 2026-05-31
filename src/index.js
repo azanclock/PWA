@@ -8,6 +8,5 @@ import AppContextProvider from './AppContext';
 
 ReactDOM.render(<AppContextProvider />, document.getElementById('root'));
 
-serviceWorkerRegistration.register();
-
+serviceWorkerRegistration.unregister();
 

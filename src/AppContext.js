@@ -6,7 +6,6 @@ import { DefaultSettings } from './data/DefaultSettings';
 import Menu from './components/Menu';
 import Loading from './components/Loading';
 import Clock from './components/Clock';
-import AudioPlayer from './components/AudioPlayer';
 import SilkSilentAudio from './components/SilkSilentAudio'
 
 export const AppContext = React.createContext();
@@ -161,7 +160,6 @@ export default function AppContextProvider() {
             {output ? <Clock /> : null}
             {showLoading ? <Loading /> : null}
             {output ? <Menu /> : null}
-            {output ? <AudioPlayer /> : null}
             <ToastContainer autoClose={2000} limit={1} />
             {isSilkBrowser && <SilkSilentAudio />}
         </AppContext.Provider>

@@ -1,0 +1,8 @@
+/manifest.json
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+/favicon.ico
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+/service-worker.js
+  Cache-Control: no-cache

@@ -4,9 +4,9 @@
   "name": "Azan Clock",
   "description": "Online Azan Clock - Muslim Prayer Times",
   "icons": [
-    { "src": "/icon48.png", "sizes": "48x48", "type": "image/png", "purpose": "maskable" },
-    { "src": "/icon72.png", "sizes": "72x72", "type": "image/png", "purpose": "maskable" },
-    { "src": "/icon144.png", "sizes": "144x144", "type": "image/png", "purpose": "any" },
+    { "src": "/icon48.png", "sizes": "48x48", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icon72.png", "sizes": "72x72", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icon144.png", "sizes": "144x144", "type": "image/png", "purpose": "any maskable" },
     { "src": "/icon192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
     { "src": "/icon512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ],

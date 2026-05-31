@@ -20,6 +20,7 @@ precacheAndRoute(self.__WB_MANIFEST);
 /* below we decide what happens on individual requests / fetches */
 
 registerRoute("/", new CacheFirst());
+registerRoute("/manifest.json", new CacheFirst());
 registerRoute("/privacy-policy/", new NetworkFirst());
 registerRoute(({ url }) => url.hostname === 'cdn.jsdelivr.net', new StaleWhileRevalidate());
 registerRoute("/reset/", new NetworkOnly());

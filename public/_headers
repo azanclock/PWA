@@ -1,5 +1,6 @@
 /manifest.json
-  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Content-Type: application/manifest+json; charset=utf-8
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 
 /favicon.ico
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800

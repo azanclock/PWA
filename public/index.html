@@ -8,14 +8,7 @@
   <title>AzanClock – Free Azan Clock - Bring Your Own Device</title>
   <meta name="description"
     content="Turn any Android, Amazon Echo or Raspberry Pi device into an actual azan clock, for free!">
-  <script>
-    if (!window.matchMedia('(display-mode: standalone)').matches && !window.navigator.standalone) {
-      var manifest = document.createElement('link');
-      manifest.rel = 'manifest';
-      manifest.href = '/manifest.json';
-      document.head.appendChild(manifest);
-    }
-  </script>
+  <link rel="manifest" href="/manifest.json">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">

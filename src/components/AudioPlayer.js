@@ -136,7 +136,7 @@ export default function AudioPlayer() {
 
     return (
         <>
-            <audio id="audioPlayer" src='' ref={audioPlayer} onPlay={audioPlayed} onPause={audioPaused} onEnded={stopAudio} onTimeUpdate={onTimeUpdate} onLoadedMetadata={onLoadedMetadata} style={{ display: 'none' }} />
+            <audio id="audioPlayer" ref={audioPlayer} onPlay={audioPlayed} onPause={audioPaused} onEnded={stopAudio} onTimeUpdate={onTimeUpdate} onLoadedMetadata={onLoadedMetadata} style={{ display: 'none' }} />
             <div ref={playerDiv} className="audioPlayerFixed">
                 <div className='d-flex flex-row gap-3'>
                     <button className='btn btn-light audioPlayerBtn' onClick={togglePause}>{isPaused ? FontAwesome.Play : FontAwesome.Pause}</button>

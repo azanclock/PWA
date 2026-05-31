@@ -378,10 +378,17 @@ export default function Clock() {
     }
 
     const updateBackground = (bg) => {
-        document.body.style.backgroundImage = null;
-        document.body.style.backgroundSize = null;
-        document.body.style.backgroundRepeat = null;
-        document.body.style.backgroundPosition = null;
+        if (bg.length > 0) {
+            document.body.style.backgroundImage = 'url(' + bg + ')';
+            document.body.style.backgroundSize = '110% 110%';
+            document.body.style.backgroundRepeat = 'no-repeat';
+        }
+        else {
+            document.body.style.backgroundImage = null;
+            document.body.style.backgroundSize = null;
+            document.body.style.backgroundRepeat = null;
+            document.body.style.backgroundPosition = null;
+        }
     }
 
     return (

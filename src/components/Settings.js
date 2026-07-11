@@ -3,6 +3,7 @@ import Address from './Address';
 import DropDown from './DropDown';
 import Options from './Options';
 import { AzanCallOptions } from '../data/AzanCallOptions';
+import { ClockFaces } from '../data/ClockFaces';
 import { DeviceModes } from '../data/DeviceModes';
 import { FajrAzans, Azans } from '../data/Audios';
 import { CalculationMethods, AsrCalculationMethods } from '../data/CalculationMethods';
@@ -83,6 +84,11 @@ export default function Settings() {
             <div className="mt-2">
                 <span className='badge mb-1 p-0'>Asr Calculation Method</span>
                 <Options name="calculationSettings.asrMethod" selectedValue={calculationSettings.asrMethod} values={AsrCalculationMethods} />
+            </div>
+
+            <div className="mt-2">
+                <span className='badge mb-1 p-0'>Clock Face</span>
+                <Options name="deviceSettings.clockFace" selectedValue={deviceSettings.clockFace} values={ClockFaces} />
             </div>
 
             <div className="mt-2">

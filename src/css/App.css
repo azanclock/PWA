@@ -16,6 +16,9 @@ body,
 body {
   background-color: black;
   position: relative;
+  /* own stacking context so the ::before/::after overlay effects
+     (z-index: -1) paint above the body background image */
+  isolation: isolate;
   min-height: 100vh;
   min-height: 100dvh;
 }
@@ -55,6 +58,81 @@ body::after {
   max-height: 91svh;
   max-width: 91vw;
   cursor: pointer;
+}
+
+#simpleClock {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: whitesmoke;
+  text-align: center;
+  background: rgba(13, 14, 15, 0.6);
+  border-radius: 3vmin;
+  padding: 4vmin 6vmin;
+  max-width: 94vw;
+  max-height: 94svh;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
+}
+
+#simpleClock.dim {
+  background: transparent;
+  text-shadow: none;
+  color: silver;
+}
+
+#simpleClock .sc-dates {
+  font-size: clamp(13px, 3vmin, 30px);
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+#simpleClock .sc-dot {
+  color: yellow;
+}
+
+#simpleClock .sc-time {
+  font-size: clamp(64px, 25vmin, 250px);
+  line-height: 1.05;
+}
+
+#simpleClock .sc-next {
+  font-size: clamp(26px, 8.5vmin, 85px);
+  line-height: 1.15;
+}
+
+#simpleClock .sc-elapsed {
+  font-size: clamp(13px, 3.2vmin, 32px);
+  opacity: 0.8;
+  margin-top: 1vmin;
+}
+
+#simpleClock .sc-vakits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5vmin 4vmin;
+  margin-top: 3.5vmin;
+}
+
+#simpleClock .sc-vakit-item {
+  min-width: max(10vmin, 88px);
+  opacity: 0.7;
+  border-top: 0.7vmin solid transparent;
+  padding-top: 1vmin;
+}
+
+#simpleClock .sc-vakit-item.current {
+  opacity: 1;
+}
+
+#simpleClock .sc-vakit-name {
+  font-size: clamp(11px, 2.6vmin, 26px);
+}
+
+#simpleClock .sc-vakit-time {
+  font-size: clamp(16px, 4.2vmin, 42px);
 }
 
 .offcanvas-body {

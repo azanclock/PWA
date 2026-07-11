@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef } from 'react'
 import { AppContext } from '../AppContext';
 import { format12 } from '../scripts/SmartAzanClock'
+import SimpleClock from './SimpleClock'
 
 export default function Clock() {
 
@@ -48,6 +49,7 @@ export default function Clock() {
             setShowMenu(!showMenu)
         }
     }
+    const simplified = deviceSettings.clockFace === 'S';
     const size = 1000; /* size = width = height */
     const black = '#0D0E0F';
     const gray = '#4B4E54';
@@ -65,9 +67,9 @@ export default function Clock() {
         const speed = 0.3 // pixels per frame
         let x = 0, y = 0, dx = speed, dy = speed * 0.7
         const interval = setInterval(() => {
-            const canvas = canvasRef.current
-            if (!canvas) return
-            const rect = canvas.getBoundingClientRect()
+            const face = dragWrapperRef.current
+            if (!face) return
+            const rect = face.getBoundingClientRect()
             const zoomed = deviceSettings.zoomedIn === 'Y'
             const diffX = Math.abs(window.innerWidth - rect.width) / 2
             const diffY = Math.abs(window.innerHeight - rect.height) / 2
@@ -88,9 +90,13 @@ export default function Clock() {
 
     useEffect(() => {
 
-        const ctx = (canvasRef.current).getContext("2d")
-
         updateBackground(background);
+        document.title = 'AzanClock • ' + currentVakit.name + ' • Next: ' + nextVakit.name + ' @ ' + nextVakit.time + ' in ' + nextText + ' • ' + locationSettings.address;
+
+        if (simplified)
+            return;
+
+        const ctx = (canvasRef.current).getContext("2d")
 
         sac.clearCanvas(ctx)
             .fillCircle(ctx, 490, 0, 0, white, 0.33)
@@ -110,7 +116,6 @@ export default function Clock() {
             .print(ctx, displayTime, 250, white, -27)
             .print(ctx, 'Elapsed ' + elapsed + ' · ' + nextVakit.name + ' in', 31, white, 109)
             .print(ctx, nextText, 156, white, 223)
-            .updateTitle(ctx, 'AzanClock • ' + currentVakit.name + ' • Next: ' + nextVakit.name + ' @ ' + nextVakit.time + ' in ' + nextText + ' • ' + locationSettings.address)
             .arcText(ctx, 'top', todaysDate, 45, 337, white)
             .arcText(ctx, 'top', hijriDate, 39, 265, white)
             .arcText(ctx, 'bottom', '#vakits#', 31, 377, white)
@@ -183,10 +188,6 @@ export default function Clock() {
             ctx.rotate(-ang);
             ctx.fillText(text, 0, 0);
             ctx.restore();
-            return sac;
-        },
-        updateTitle(ctx, title) {
-            document.title = title;
             return sac;
         },
         drawArrow: (ctx, angle, x, width, height, color) => {
@@ -401,9 +402,11 @@ export default function Clock() {
                     onPointerUp={handlePointerUp}
                     onClick={handleClick}
                     style={{ touchAction: 'none', cursor: 'grab' }}>
-                    <canvas id="clockCanvas" className="img-fluid"
-                        style={{ opacity: clockOpacity, transform: deviceSettings.zoomedIn === 'Y' ? 'scale(2.2) translateY(-3%)' : 'none' }}
-                        width={size} height={size} ref={canvasRef} ></canvas>
+                    {simplified
+                        ? <SimpleClock />
+                        : <canvas id="clockCanvas" className="img-fluid"
+                            style={{ opacity: clockOpacity, transform: deviceSettings.zoomedIn === 'Y' ? 'scale(2.2) translateY(-3%)' : 'none' }}
+                            width={size} height={size} ref={canvasRef} ></canvas>}
                 </div>
             </div>
         </div >

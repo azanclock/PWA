@@ -4,7 +4,7 @@ import { AppContext } from '../AppContext';
 export default function SimpleClock() {
 
     const { todaysDate, hijriDate, vakits, currentVakit, nextVakit,
-        displayTime, elapsed, nextText, dim, clockOpacity } = useContext(AppContext)
+        displayTime, nextText, dim, clockOpacity } = useContext(AppContext)
 
     return (
         <div id="simpleClock" className={dim === 1 ? 'dim' : ''} style={{ opacity: clockOpacity }}>
@@ -14,9 +14,8 @@ export default function SimpleClock() {
 
             <div className="sc-time">{displayTime}</div>
 
-            <div className="sc-next">{nextVakit.name} in {nextText}</div>
-
-            <div className="sc-elapsed">Elapsed {elapsed}</div>
+            <div className="sc-next-label">{nextVakit.name} in</div>
+            <div className="sc-next">{nextText}</div>
 
             {dim !== 1 &&
                 <div className="sc-vakits">

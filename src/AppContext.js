@@ -157,9 +157,7 @@ export default function AppContextProvider() {
     }
 
     const refreshClock = () => {
-        setOutput(SmartAzanClock.run('manual refresh'));
-        requestWakeLock();
-        setShowMenu(false);
+        window.location.reload();
     }
 
     return (

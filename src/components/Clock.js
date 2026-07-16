@@ -70,11 +70,10 @@ export default function Clock() {
             const face = dragWrapperRef.current
             if (!face) return
             const rect = face.getBoundingClientRect()
-            const zoomed = deviceSettings.zoomedIn === 'Y'
             const diffX = Math.abs(window.innerWidth - rect.width) / 2
             const diffY = Math.abs(window.innerHeight - rect.height) / 2
-            const maxX = zoomed ? 30 : Math.max(diffX, 30)
-            const maxY = zoomed ? 20 : Math.max(diffY, 30)
+            const maxX = Math.max(diffX, 30)
+            const maxY = Math.max(diffY, 30)
             x += dx
             y += dy
             if (x >= maxX || x <= -maxX) dx = -dx
@@ -86,7 +85,7 @@ export default function Clock() {
                 document.body.style.backgroundPosition = `${50 + x * 0.15}% ${50 + y * 0.15}%`
         }, 50)
         return () => clearInterval(interval)
-    }, [deviceSettings.screenSaver, deviceSettings.zoomedIn])
+    }, [deviceSettings.screenSaver])
 
     useEffect(() => {
 
@@ -405,7 +404,7 @@ export default function Clock() {
                     {simplified
                         ? <SimpleClock />
                         : <canvas id="clockCanvas" className="img-fluid"
-                            style={{ opacity: clockOpacity, transform: deviceSettings.zoomedIn === 'Y' ? 'scale(2.2) translateY(-3%)' : 'none' }}
+                            style={{ opacity: clockOpacity }}
                             width={size} height={size} ref={canvasRef} ></canvas>}
                 </div>
             </div>

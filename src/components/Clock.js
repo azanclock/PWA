@@ -53,8 +53,11 @@ export default function Clock() {
     const size = 1000; /* size = width = height */
     const black = '#0D0E0F';
     const gray = '#4B4E54';
-    const white = 'whitesmoke';
-    const silver = 'silver';
+    /* dim mode uses dark red: gentlest on night vision and sleep */
+    const nightRed = '#CC3322';
+    const nightRedDark = '#5A1510';
+    const white = dim === 1 ? nightRed : 'whitesmoke';
+    const silver = nightRed;
 
     useEffect(() => {
         const el = driftRef.current
@@ -295,12 +298,12 @@ export default function Clock() {
                 ctx.beginPath();
 
                 if (currentArcVakit.index === i) {
-                    ctx.strokeStyle = (dim === 1 ? 'gray' : arcVakits[i].color);
+                    ctx.strokeStyle = (dim === 1 ? nightRedDark : arcVakits[i].color);
                     ctx.lineWidth = arcWidth * 0.41;
                     ctx.globalAlpha = 1;
                 }
                 else {
-                    ctx.strokeStyle = (dim === 1 ? 'gray' : arcVakits[i].color);
+                    ctx.strokeStyle = (dim === 1 ? nightRedDark : arcVakits[i].color);
                     ctx.lineWidth = arcWidth * 0.21;
                     ctx.globalAlpha = 0.67;
                 }

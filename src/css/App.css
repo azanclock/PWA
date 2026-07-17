@@ -79,7 +79,8 @@ body::after {
 #simpleClock.dim {
   background: transparent;
   text-shadow: none;
-  color: silver;
+  /* dark red: gentlest on night vision and sleep */
+  color: #CC3322;
 }
 
 #simpleClock .sc-dates {
@@ -106,8 +107,8 @@ body::after {
 }
 
 #simpleClock .sc-next {
-  font-size: min(24vw, 29vh);
-  font-size: min(24vw, 29svh);
+  font-size: min(21vw, 25vh);
+  font-size: min(21vw, 25svh);
   letter-spacing: -0.02em;
   line-height: 1;
   white-space: nowrap;
@@ -122,7 +123,7 @@ body::after {
 }
 
 #simpleClock .sc-vakit-item {
-  min-width: max(9vmin, 76px);
+  min-width: max(9vmin, 84px);
   opacity: 0.6;
   border-top: 0.5vmin solid transparent;
   padding-top: 0.8vmin;
@@ -133,11 +134,24 @@ body::after {
 }
 
 #simpleClock .sc-vakit-name {
-  font-size: clamp(10px, 2.2vmin, 20px);
+  font-size: clamp(12px, 2.8vmin, 26px);
 }
 
 #simpleClock .sc-vakit-time {
-  font-size: clamp(14px, 3.4vmin, 34px);
+  font-size: clamp(17px, 4.4vmin, 44px);
+}
+
+/* narrow screens: exactly 3 prayer times per row */
+@media (max-width: 640px) {
+  #simpleClock .sc-vakits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 5vmin;
+  }
+
+  #simpleClock .sc-vakit-item {
+    min-width: 0;
+  }
 }
 
 .offcanvas-body {

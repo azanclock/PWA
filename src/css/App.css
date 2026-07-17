@@ -63,7 +63,7 @@ body::after {
 #simpleClock {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  color: whitesmoke;
+  color: #D4D4D4;
   text-align: center;
   background: rgba(13, 14, 15, 0.6);
   border-radius: 3vmin;

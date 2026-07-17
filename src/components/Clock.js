@@ -19,7 +19,7 @@ export default function Clock() {
     /* dim mode uses dark red: gentlest on night vision and sleep */
     const nightRed = '#CC3322';
     const nightRedDark = '#5A1510';
-    const white = dim === 1 ? nightRed : 'whitesmoke';
+    const white = dim === 1 ? nightRed : '#D4D4D4';
     const silver = nightRed;
 
     useEffect(() => {

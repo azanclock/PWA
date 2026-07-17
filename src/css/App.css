@@ -141,12 +141,34 @@ body::after {
   font-size: clamp(17px, 4.4vmin, 44px);
 }
 
-/* narrow screens: exactly 3 prayer times per row */
+/* narrow screens: spread content over the screen height,
+   exactly 3 prayer times per row */
 @media (max-width: 640px) {
+  #simpleClock {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    min-height: 86vh;
+    min-height: 86svh;
+    padding: 2vh 4vw;
+  }
+
+  #simpleClock .sc-time {
+    font-size: min(36vw, 24vh);
+    font-size: min(36vw, 24svh);
+  }
+
+  #simpleClock .sc-next {
+    font-size: min(28vw, 18vh);
+    font-size: min(28vw, 18svh);
+  }
+
   #simpleClock .sc-vakits {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     row-gap: 5vmin;
+    width: 100%;
   }
 
   #simpleClock .sc-vakit-item {

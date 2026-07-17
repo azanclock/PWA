@@ -10,45 +10,8 @@ export default function Clock() {
         elapsed, background, dim, clockOpacity, midnightAngle, oneThirdAngle, twoThirdAngle, alarmSettings, naflAlarmSettings, isWeekDay } = useContext(AppContext)
     const canvasRef = useRef(null)
     const driftRef = useRef(null)
-    const dragWrapperRef = useRef(null)
-    const dragRef = useRef({ isDragging: false, startX: 0, startY: 0, offsetX: 0, offsetY: 0, hasMoved: false })
+    const faceRef = useRef(null)
 
-    const handlePointerDown = (e) => {
-        const drag = dragRef.current
-        drag.isDragging = true
-        drag.startX = e.clientX - drag.offsetX
-        drag.startY = e.clientY - drag.offsetY
-        drag.hasMoved = false
-        e.currentTarget.setPointerCapture(e.pointerId)
-    }
-
-    const handlePointerMove = (e) => {
-        const drag = dragRef.current
-        if (!drag.isDragging) return
-        const newX = e.clientX - drag.startX
-        const newY = e.clientY - drag.startY
-        if (Math.abs(newX - drag.offsetX) > 3 || Math.abs(newY - drag.offsetY) > 3)
-            drag.hasMoved = true
-        drag.offsetX = newX
-        drag.offsetY = newY
-        const el = dragWrapperRef.current
-        if (el) el.style.transform = `translate(${newX}px, ${newY}px)`
-    }
-
-    const handlePointerUp = () => {
-        const drag = dragRef.current
-        drag.isDragging = false
-        drag.offsetX = 0
-        drag.offsetY = 0
-        const el = dragWrapperRef.current
-        if (el) el.style.transform = 'translate(0px, 0px)'
-    }
-
-    const handleClick = () => {
-        if (!dragRef.current.hasMoved) {
-            setShowMenu(!showMenu)
-        }
-    }
     const simplified = deviceSettings.clockFace === 'S';
     const size = 1000; /* size = width = height */
     const black = '#0D0E0F';
@@ -70,7 +33,7 @@ export default function Clock() {
         const speed = 0.3 // pixels per frame
         let x = 0, y = 0, dx = speed, dy = speed * 0.7
         const interval = setInterval(() => {
-            const face = dragWrapperRef.current
+            const face = faceRef.current
             if (!face) return
             const rect = face.getBoundingClientRect()
             const diffX = Math.abs(window.innerWidth - rect.width) / 2
@@ -398,12 +361,7 @@ export default function Clock() {
         <div className='d-flex flex-row h-100 align-items-center justify-content-center'
             style={{ overflow: 'hidden' }}>
             <div ref={driftRef}>
-                <div ref={dragWrapperRef}
-                    onPointerDown={handlePointerDown}
-                    onPointerMove={handlePointerMove}
-                    onPointerUp={handlePointerUp}
-                    onClick={handleClick}
-                    style={{ touchAction: 'none', cursor: 'grab' }}>
+                <div ref={faceRef} onClick={() => setShowMenu(!showMenu)}>
                     {simplified
                         ? <SimpleClock />
                         : <canvas id="clockCanvas" className="img-fluid"

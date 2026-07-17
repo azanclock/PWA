@@ -14,8 +14,10 @@ export default function SimpleClock() {
 
             <div className="sc-time">{displayTime}</div>
 
-            <div className="sc-next-label">{nextVakit.name} in</div>
-            <div className="sc-next">{nextText}</div>
+            <div className="sc-remaining">
+                <div className="sc-next-label">{nextVakit.name} in</div>
+                <div className="sc-next">{nextText}</div>
+            </div>
 
             {dim !== 1 &&
                 <div className="sc-vakits">

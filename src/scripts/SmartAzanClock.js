@@ -36,7 +36,7 @@ export const SmartAzanClock = {
         let nD = new Date();
         this.currentDateTime = new Date(nD.toLocaleString("en-US", { timeZone: this.settings.locationSettings.timeZoneID }));
         this.currentTimeString = this.currentDateTime.getHours() + ':' + fillInZeros(this.currentDateTime.getMinutes());
-        this.prayerTimes = prayTimes.getTimes(this.currentDateTime, [this.settings.locationSettings.lat, this.settings.locationSettings.lng, 0], getOffsetHoursFromTimeZone(this.settings.locationSettings.timeZoneID), 0, '24h');
+        this.prayerTimes = prayTimes.getTimes(this.currentDateTime, [this.settings.locationSettings.lat, this.settings.locationSettings.lng, 0], getOffsetHoursForCalendarDate(this.settings.locationSettings.timeZoneID, this.currentDateTime), 0, '24h');
 
         let vakits = [];
         let arcVakits = [];
@@ -279,6 +279,14 @@ const getOffsetHoursFromTimeZone = (tz, date = new Date()) => {
     const instant = date.getTime() - date.getMilliseconds();
     return (wallAsUtc - instant) / 3600000;
 }
+
+// Offset in effect at local noon of the given calendar date (Y/M/D taken from d's local fields),
+// so a whole day's prayer times use that day's offset, even across a DST switch.
+const getOffsetHoursForCalendarDate = (tz, d) => {
+    const utcNoon = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), 12);
+    const guess = getOffsetHoursFromTimeZone(tz, new Date(utcNoon));
+    return getOffsetHoursFromTimeZone(tz, new Date(utcNoon - guess * 3600000));
+};
 
 const addMinutesToTime = (t, m) => {
     let thisTime = new Date();

@@ -265,11 +265,19 @@ const getTotalMinutes = (t) => {
     let tt = t.split(':');
     return tt[0] * 60 + tt[1] * 1;
 }
-const getOffsetHoursFromTimeZone = (tz) => {
-    let date = new Date();
-    let utcDate = new Date(date.toLocaleString('en-US', { timeZone: 'UTC' }));
-    let tzDate = new Date(date.toLocaleString('en-US', { timeZone: tz }));
-    return (tzDate.getTime() - utcDate.getTime()) / 3600000;
+const getOffsetHoursFromTimeZone = (tz, date = new Date()) => {
+    // Build the zone's wall-clock time as if it were UTC and compare with the real instant.
+    // Unlike parsing formatted strings with new Date(), this doesn't depend on the device's
+    // own zone, so it stays correct around local DST transitions.
+    const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: tz, hourCycle: 'h23', year: 'numeric', month: 'numeric', day: 'numeric',
+        hour: 'numeric', minute: 'numeric', second: 'numeric'
+    }).formatToParts(date);
+    const v = {};
+    parts.forEach(p => { v[p.type] = +p.value; });
+    const wallAsUtc = Date.UTC(v.year, v.month - 1, v.day, v.hour, v.minute, v.second);
+    const instant = date.getTime() - date.getMilliseconds();
+    return (wallAsUtc - instant) / 3600000;
 }
 
 const addMinutesToTime = (t, m) => {
@@ -278,4 +286,4 @@ const addMinutesToTime = (t, m) => {
     thisTime.setHours(tt[0], tt[1], 0);
     thisTime.setMinutes(thisTime.getMinutes() + m * 1);
     return (thisTime.getHours() + ':' + fillInZeros(thisTime.getMinutes()));
-};
+};
